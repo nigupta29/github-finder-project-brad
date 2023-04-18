@@ -18,6 +18,7 @@ export const GithubProvider = ({ children }) => {
     })
   }
 
+  // testing purpose to check whether the things are loading
   const fetchUsers = async () => {
     setLoading()
     const response = await fetch(`${GITHUB_URL}/users`, {
