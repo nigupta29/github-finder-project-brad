@@ -34,9 +34,33 @@ export const GithubProvider = ({ children }) => {
     })
   }
 
+  // search users with help of search from input field
+  const searchUsers = async text => {
+    setLoading()
+    const params = new URLSearchParams({
+      q: text,
+    })
+    const response = await fetch(`${GITHUB_URL}/search/users?${params}`, {
+      headers: {
+        Authorization: `token ${GITHUB_API_TOKEN}`,
+      },
+    })
+    const { items } = await response.json()
+
+    dispatch({
+      type: 'GET_USERS',
+      payload: items,
+    })
+  }
+
   return (
     <GithubContext.Provider
-      value={{ users: state.users, loading: state.loading, fetchUsers }}
+      value={{
+        users: state.users,
+        loading: state.loading,
+        fetchUsers,
+        searchUsers,
+      }}
     >
       {children}
     </GithubContext.Provider>
