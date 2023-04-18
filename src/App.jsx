@@ -5,6 +5,7 @@ import {
   createRoutesFromElements,
 } from 'react-router-dom'
 import RootLayout from './components/layouts/RootLayout'
+import { GithubProvider } from './context/github/GithubContext'
 import About from './pages/About'
 import Home from './pages/Home'
 import NotFound from './pages/NotFound'
@@ -20,5 +21,9 @@ const router = createBrowserRouter(
 )
 
 export default function App() {
-  return <RouterProvider router={router} />
+  return (
+    <GithubProvider>
+      <RouterProvider router={router} />
+    </GithubProvider>
+  )
 }
